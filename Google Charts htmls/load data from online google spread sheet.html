@@ -1,0 +1,36 @@
+<html>
+<head>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+google.load("visualization", '1', {packages:['corechart']});
+google.setOnLoadCallback(drawChart);
+function drawChart() {
+ // var query1 = new google.visualization.Query(
+ //     'https://docs.google.com/spreadsheet/ccc?key=0Atw2BTU52lOCdEZpUlVIdmxGOWZBR2tuLXhYN2dQTWc&usp=drive_web&gid=0#');
+  var query2 = new google.visualization.Query(
+      'https://docs.google.com/a/google.com/spreadsheet/ccc?key=0Atw2BTU52lOCdEZpUlVIdmxGOWZBR2tuLXhYN2dQTWc&usp=drive_web&gid=0#&range=A1:C4');
+  
+ // query1.send(handleQueryResponse);
+  query2.send(handleQueryResponse);
+
+}
+
+function handleQueryResponse(response) {
+  if (response.isError()) {
+    alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+    return;
+  }
+
+  var data = response.getDataTable();
+  var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
+  chart.draw(data, { legend: { position: 'none' } });
+}
+</script>
+
+<title>Data from a Spreadsheet</title>
+</head>
+
+<body>
+<span id='columnchart'></span>
+</body>
+</html>
